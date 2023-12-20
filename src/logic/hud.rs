@@ -33,7 +33,7 @@ pub fn display(
 ) {
     // let mut agent = None;
 
-    egui::Window::new("Active Control").show(contexts.ctx_mut(), |ui| {
+    egui::Window::new("Active Control").default_open(false).show(contexts.ctx_mut(), |ui| {
         match ac.0 {
             None => {
                 ui.label("Select an agent");

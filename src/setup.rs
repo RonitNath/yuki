@@ -84,7 +84,7 @@ fn frame_time(
         ::new("Stats")
         .default_size([100.0, 200.0])
         .default_pos([0.0, -1000.0])
-        .default_open(false)
+        .default_open(true)
         .show(contexts.ctx_mut(), |ui| {
             let time_since_start = time.elapsed_seconds_f64();
             let fps = 1.0 / *latest_average;

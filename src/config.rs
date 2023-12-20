@@ -1,5 +1,8 @@
 use std::f32::consts::PI;
 
+pub const RADIUS: f32 = 10.0;
+
+
 pub const VISIBLE_Z: f32 = -1.0;
 pub const CHILD_VISIBLE_Z: f32 = 0.5;
 

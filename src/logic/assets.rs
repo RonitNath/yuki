@@ -22,10 +22,7 @@ pub fn init_assets(
     mut materials: ResMut<Assets<ColorMaterial>>
 ) {
     let sizes = vec![
-        ("AGENT".to_string(), 1.0),
-        ("BASE".to_string(), 1.0),
-        ("EYEBALL".to_string(), EYEBALL_SCALAR),
-        ("BASE_TAG".to_string(), 0.9)
+        ("DEBUG".to_string(), 1.0),
     ];
 
     for (title, size) in sizes {

@@ -2,7 +2,7 @@ use std::collections::BTreeSet;
 
 use bevy::{ time::Stopwatch };
 use rand::seq::IteratorRandom;
-use crate::hud::{ActiveControl, SelectedPos};
+use crate::logic::hud::{ActiveControl, SelectedPos};
 
 use crate::{
     prelude::*,
