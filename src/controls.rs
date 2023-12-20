@@ -2,12 +2,11 @@ use std::collections::BTreeSet;
 
 use bevy::{ time::Stopwatch };
 use rand::seq::IteratorRandom;
+use crate::hud::{ActiveControl, SelectedPos};
 
 use crate::{
     prelude::*,
     setup::MoveCamera,
-    world::agent::Agent,
-    logic::hud::{ ActiveControl, CameraFollows, SelectedPos },
 };
 
 pub struct ControlsPlugin;
@@ -41,8 +40,6 @@ fn camera_commands(
     keys: Res<Input<KeyCode>>,
     mut query: Query<(&mut Transform, &mut OrthographicProjection, With<Camera>)>,
     mut camera_moved: EventReader<MoveCamera>,
-    camera_follow: Res<CameraFollows>,
-    agents: Query<&Transform, (With<Agent>, Without<Camera>)>
 ) {
     for (mut camera_tf, mut proj, ()) in query.iter_mut() {
         let mut x = 0.0;
@@ -88,21 +85,6 @@ fn camera_commands(
         if keys.pressed(KeyCode::Space) {
             proj.scale *= 1.1;
         }
-
-        match camera_follow.0 {
-            Some(entity) => {
-                if let Ok(tf) = agents.get(entity) {
-                    camera_tf.translation = tf.translation
-                        .truncate()
-                        .extend(camera_tf.translation.z);
-                }
-            }
-            None => {
-                let camera_scalar = CAMERA_SPEED_SCALAR;
-                camera_tf.translation.x += x * proj.scale * camera_scalar;
-                camera_tf.translation.y += y * proj.scale * camera_scalar;
-            }
-        }
     }
 }
 
@@ -137,11 +119,10 @@ pub fn mouse_selection(
     mut gui_select: ResMut<GUISelect>,
     camera: Query<(&Transform, &OrthographicProjection), With<Camera>>,
     mut gizmos: Gizmos,
-    agents: Query<Entity, With<Agent>>,
     mut commands: Commands,
     keys: Res<Input<KeyCode>>,
     mut sp: ResMut<SelectedPos>,
-    mut ac: ResMut<ActiveControl>
+    mut ac: ResMut<ActiveControl>,
 ) {
     if mouse_button_input.pressed(MouseButton::Left) {
         let window = windows.get_single().unwrap();
@@ -171,14 +152,14 @@ pub fn mouse_selection(
 
         gizmos.circle_2d(pos, 100.0, Color::BLACK);
 
-        rapier_context.intersections_with_point(pos, QueryFilter::new(), |entity| {
-            gui_select.add(entity);
-            if keys.pressed(KeyCode::ControlLeft) {
-                if let Ok(entity) = agents.get(entity) {
-                    ac.0 = Some(entity.clone());
-                }
-            }
-            true
-        });
+        // rapier_context.intersections_with_point(pos, QueryFilter::new(), |entity| {
+        //     gui_select.add(entity);
+        //     if keys.pressed(KeyCode::ControlLeft) {
+        //         if let Ok(entity) = agents.get(entity) {
+        //             ac.0 = Some(entity.clone());
+        //         }
+        //     }
+        //     true
+        // });
     }
 }

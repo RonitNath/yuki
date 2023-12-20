@@ -1,9 +1,8 @@
-mod setup;
+pub mod setup;
 pub mod prelude;
 pub mod controls;
-mod config;
-pub mod world;
-pub mod logic;
+pub mod config;
+pub mod hud;
 
 use rand::Rng;
 
@@ -14,8 +13,6 @@ fn main() {
         .add_plugins((
             setup::SetupPlugin,
             controls::ControlsPlugin,
-            world::WorldPlugin,
-            logic::LogicPlugin,
         ))
         .run();
 }
