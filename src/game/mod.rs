@@ -25,21 +25,24 @@ pub fn initialize(
     assets: Res<GeneratedAssets>
 ) {
     // Create the map
-    let wall_half_x = 10.0;
-    let wall_half_y = 1000.0;
+
     let wall_collider: Collider = Collider::cuboid(wall_half_x, wall_half_y);
-    let floor_half_x = 800.0;
-    let floor_half_y = 10.0;
     let floor_collider: Collider = Collider::cuboid(floor_half_x, floor_half_y);
 
+    let color = assets.colors.get("BLACK").expect("Colors always exist").0;
+    let wall_mesh = assets.meshes.get("WALL").expect("meshes");
+    let floor_mesh = assets.meshes.get("FLOOR").expect("floor");
     // left
-    commands.spawn(Wall).insert(RigidBody::Fixed).insert(wall_collider).insert(render).insert(pos);
+
+    let pos = Transform::from_translation(Vec3::new(-floor_half_x, 0.0, VISIBLE_Z));
+    let render = make_render(wall_mesh, color, pos);
+    commands.spawn(Wall).insert(RigidBody::Fixed).insert(wall_collider).insert(render);
 
     // right
-    commands.spawn(Wall).insert(RigidBody::Fixed).insert(wall_collider).insert(render).insert(pos);
+    commands.spawn(Wall).insert(RigidBody::Fixed).insert(wall_collider).insert(render);
 
     // bottom
-    commands.spawn(Wall).insert(RigidBody::Fixed).insert(floor_collider).insert(render).insert(pos);
+    commands.spawn(Wall).insert(RigidBody::Fixed).insert(floor_collider).insert(render);
 
 
 

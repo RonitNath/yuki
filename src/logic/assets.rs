@@ -31,6 +31,9 @@ pub fn init_assets(
         );
         ga.meshes.insert(title, mesh.into());
     }
+    ga.meshes.insert("WALL".to_string(), meshes.add(Mesh::from(shape::Quad::new(Vec2::new(wall_half_x * 2.0, wall_half_y * 2.0)))).into());
+    ga.meshes.insert("FLOOR".to_string(), meshes.add(Mesh::from(shape::Quad::new(Vec2::new(floor_half_x * 2.0, floor_half_y * 2.0)))).into());
+    
 
     let colors = vec![
         ("WHITE".to_string(), Color::WHITE),
