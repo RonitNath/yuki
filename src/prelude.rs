@@ -11,7 +11,7 @@ pub use crate::config::*;
 pub type Render = MaterialMesh2dBundle<ColorMaterial>;
 
 pub fn make_render(
-    mesh: Handle<Mesh>,
+    mesh: Mesh2dHandle,
     material: Handle<ColorMaterial>,
     transform: Transform
 ) -> Render {

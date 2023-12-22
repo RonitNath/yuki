@@ -18,7 +18,6 @@ impl Fruit {
         assets: &Res<GeneratedAssets>
     ) -> Entity {
         let mesh = assets.meshes.get("DEBUG").unwrap();
-        let (acolor, amaterial) = assets.colors.get(&format!("A{}", color)).unwrap();
         let (color, material) = assets.colors.get(&color).unwrap();
         let body = BodyBundle::spawn(
             RADIUS,
