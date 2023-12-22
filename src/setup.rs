@@ -95,6 +95,8 @@ fn frame_time(
 fn setup_config(mut commands: Commands, mut rapier_config: ResMut<RapierConfiguration>) {
     if !GRAVITY {
         rapier_config.gravity = Vec2::ZERO;
+    } else {
+        rapier_config.gravity = Vect::Y * -9.81 * 100.0;
     }
     // Add a camera so we can see the debug-render.
     commands.spawn(Camera2dBundle::default()).insert(OrthographicProjection {

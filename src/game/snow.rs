@@ -23,7 +23,7 @@ impl Snow {
         size: f32,
     ) -> Entity {
         dbg!("spawning");
-        let mesh = assets.meshes.get((size / RADIUS).to_string().as_str()).expect(format!("Size exists {}", (size / RADIUS).to_string()).as_str());
+        let mesh = assets.meshes.get((size).to_string().as_str()).expect(format!("Size exists {}", (size).to_string()).as_str());
         let (color, material) = assets.colors.get(&color).unwrap();
         let body = BodyBundle::spawn(
             size,

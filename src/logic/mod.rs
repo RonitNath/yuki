@@ -1,6 +1,7 @@
 use std::time::Duration;
 
 use bevy::time::Stopwatch;
+use rand::Rng;
 
 use crate::{prelude::*, game::snow::Snow};
 
@@ -15,7 +16,7 @@ pub struct LogicPlugin;
 
 impl Plugin for LogicPlugin {
     fn build(&self, app: &mut App) {
-        app.add_plugins((hud::HudPlugin, assets::AssetPlugin)).add_systems(Update, (combine, spawn_on_click.after(crate::controls::mouse_selection)));
+        app.register_type::<Body>().add_plugins((hud::HudPlugin, assets::AssetPlugin)).add_systems(Update, (combine, spawn_on_click.after(crate::controls::mouse_selection)));
     }
 }
 
@@ -35,7 +36,9 @@ pub fn spawn_on_click(
         if *cooldown > 0.1 {
             let dir = Vec2::Y;
             let color = String::from("WHITE");
-            Snow::spawn(pos, dir, color, &mut commands, &assets, RADIUS);
+
+            let size = rand::thread_rng().gen_range(1..5);
+            Snow::spawn(pos, dir, color, &mut commands, &assets, size as f32 * 2.0);
     
             sp.0 = None;
             *cooldown = 0.0;
@@ -81,7 +84,7 @@ pub fn combine(
 
                             let dir = Vec2::Y;
                             let color = String::from("WHITE");
-                            Snow::spawn(pos, dir, color, &mut commands, &assets, b1.radius * 2.0);
+                            Snow::spawn(pos, dir, color, &mut commands, &assets, b1.radius + 2.0);
                         }
                     } else {
                         warn!("E2 not found in combine");

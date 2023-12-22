@@ -75,8 +75,8 @@ fn camera_commands(
         }
 
         if pressed {
-            camera_tf.translation.x += x * proj.scale;
-            camera_tf.translation.y += y * proj.scale;
+            camera_tf.translation.x += x * proj.scale * CAMERA_SPEED_SCALAR;
+            camera_tf.translation.y += y * proj.scale * CAMERA_SPEED_SCALAR;
         }
 
         // shift is orthographic projection in

@@ -23,7 +23,7 @@ pub fn init_assets(
 ) {
 
     for size in 0..15 {
-        let powed = 2_f32.powi(size);
+        let powed = (size + 1) as f32 * 2.0;
         let mesh = meshes.add(
             Mesh::from(shape::Circle { radius: powed * RADIUS, ..Default::default() })
         );

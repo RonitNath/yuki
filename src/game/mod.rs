@@ -57,6 +57,6 @@ pub fn initialize(
     let pos = Vec2::ZERO;
     let dir = Vec2::Y;
     let color = String::from("WHITE");
-    Snow::spawn(pos, dir, color, &mut commands, &assets, RADIUS);
+    Snow::spawn(pos, dir, color, &mut commands, &assets, 2.0);
 }
 

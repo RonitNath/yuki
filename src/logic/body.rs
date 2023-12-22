@@ -55,7 +55,7 @@ impl BodyBundle {
         let mut tf = Transform::from_translation(pos.extend(VISIBLE_Z));
         tf.rotate_z(Vec2::Y.angle_between(dir));
 
-        let pb = PhysicsBody::new(Collider::ball(radius), Render {
+        let pb = PhysicsBody::new(Collider::ball(radius * RADIUS), Render {
             mesh,
             material,
             transform: tf,
