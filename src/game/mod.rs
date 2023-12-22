@@ -1,9 +1,9 @@
 use crate::{
-    prelude::*, logic::assets::GeneratedAssets,
+    prelude::*, logic::{assets::GeneratedAssets, hud::SelectedPos},
 };
 
-pub mod fruit;
-use fruit::Fruit;
+pub mod snow;
+use snow::Snow;
 
 
 pub struct GamePlugin;
@@ -13,6 +13,8 @@ impl Plugin for GamePlugin {
         app.add_systems(Startup, initialize);
     }
 }
+
+
 
 #[derive(Component)]
 pub struct Wall;
@@ -55,6 +57,6 @@ pub fn initialize(
     let pos = Vec2::ZERO;
     let dir = Vec2::Y;
     let color = String::from("WHITE");
-    Fruit::spawn(pos, dir, color, &mut commands, &assets);
+    Snow::spawn(pos, dir, color, &mut commands, &assets, RADIUS);
 }
 

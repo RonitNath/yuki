@@ -120,14 +120,10 @@ impl GUISelect {
 pub fn mouse_selection(
     mouse_button_input: Res<Input<MouseButton>>,
     windows: Query<&Window>,
-    rapier_context: Res<RapierContext>,
-    mut gui_select: ResMut<GUISelect>,
     camera: Query<(&Transform, &OrthographicProjection), With<Camera>>,
     mut gizmos: Gizmos,
-    mut commands: Commands,
     keys: Res<Input<KeyCode>>,
     mut sp: ResMut<SelectedPos>,
-    mut ac: ResMut<ActiveControl>,
 ) {
     if mouse_button_input.pressed(MouseButton::Left) {
         let window = windows.get_single().unwrap();
@@ -145,7 +141,8 @@ pub fn mouse_selection(
         );
         let pos = camera_pos + mouse_pos * camera_scale;
 
-        if keys.pressed(KeyCode::ControlLeft) {
+        if mouse_button_input.just_pressed(MouseButton::Left) && keys.pressed(KeyCode::ControlLeft) {
+            dbg!("spawn requested");
             sp.0 = Some(pos);
         }
 

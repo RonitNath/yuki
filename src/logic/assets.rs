@@ -21,15 +21,13 @@ pub fn init_assets(
     mut meshes: ResMut<Assets<Mesh>>,
     mut materials: ResMut<Assets<ColorMaterial>>
 ) {
-    let sizes = vec![
-        ("DEBUG".to_string(), 1.0),
-    ];
 
-    for (title, size) in sizes {
+    for size in 0..15 {
+        let powed = 2_f32.powi(size);
         let mesh = meshes.add(
-            Mesh::from(shape::Circle { radius: size * RADIUS, ..Default::default() })
+            Mesh::from(shape::Circle { radius: powed * RADIUS, ..Default::default() })
         );
-        ga.meshes.insert(title, mesh.into());
+        ga.meshes.insert((powed).to_string(), mesh.into());
     }
     ga.meshes.insert("WALL".to_string(), meshes.add(Mesh::from(shape::Quad::new(Vec2::new(wall_half_x * 2.0, wall_half_y * 2.0)))).into());
     ga.meshes.insert("FLOOR".to_string(), meshes.add(Mesh::from(shape::Quad::new(Vec2::new(floor_half_x * 2.0, floor_half_y * 2.0)))).into());
