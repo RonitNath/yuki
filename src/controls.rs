@@ -74,6 +74,11 @@ fn camera_commands(
             pressed = true;
         }
 
+        if pressed {
+            camera_tf.translation.x += x * proj.scale;
+            camera_tf.translation.y += y * proj.scale;
+        }
+
         // shift is orthographic projection in
         if keys.pressed(KeyCode::ShiftLeft) {
             // proj must be > 0

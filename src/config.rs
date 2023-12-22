@@ -3,8 +3,8 @@ use std::f32::consts::PI;
 pub const RADIUS: f32 = 10.0;
 
 pub const wall_half_x: f32 = 10.0;
-pub const wall_half_y: f32 = 1000.0;
-pub const floor_half_x: f32 = 800.0;
+pub const wall_half_y: f32 = 500.0;
+pub const floor_half_x: f32 = 400.0;
 pub const floor_half_y: f32 = 10.0;
 
 pub const VISIBLE_Z: f32 = -1.0;
